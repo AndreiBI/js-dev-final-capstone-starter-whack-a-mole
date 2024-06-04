@@ -45,6 +45,10 @@ h2 {
   cursor: url('../assets/mallet.png'), pointer;
 }
 
+.grid img {
+  max-width: 70%;
+}
+
 .hole {
   flex: 1 0 33.33%;
   overflow: hidden;
