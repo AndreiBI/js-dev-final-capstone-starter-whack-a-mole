@@ -1,8 +1,6 @@
 const holes = document.querySelectorAll('.hole');
 const moles = document.querySelectorAll('.mole');
 const startButton = document.querySelector('#start');
-
-// Use querySelector() or querySelectorAll()
 const score= document.querySelector('#score'); // Use querySelector() to get the score element
 const timerDisplay = document.querySelector('#timer'); // use querySelector() to get the timer element.
 
@@ -12,10 +10,16 @@ let lastHole = 0;
 let points = 0;
 let difficulty = "hard";
 
+/**
+ * Generates a random integer within a range.
+ */
 function randomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+/**
+ * Sets the time delay based on difficulty.
+ */
 function setDelay(difficulty) {
   if (difficulty === "easy") {
     return 1500;
@@ -28,6 +32,9 @@ function setDelay(difficulty) {
   }
 }
 
+/**
+ * Chooses a random hole, ensuring it's not the last one used.
+ */
 function chooseHole(holes) {
   const index = randomInteger(0, 8);
   const hole = holes[index];
@@ -40,6 +47,9 @@ function chooseHole(holes) {
   return hole;
 }
 
+/**
+ * Determines if the game should continue or stop.
+ */
 function gameOver() {
   if (time <= 0) {
     return stopGame();
@@ -48,12 +58,18 @@ function gameOver() {
   }
 }
 
+/**
+ * Shows a mole and hides it after a delay.
+ */
 function showUp() {
   const delay = setDelay(difficulty);
   const hole = chooseHole(holes);
   return showAndHide(hole, delay);
 }
 
+/**
+ * Toggles the visibility of a mole, then hides it after a delay.
+ */
 function showAndHide(hole, delay) {
   toggleVisibility(hole);
   const timeoutID = setTimeout(() => {
@@ -63,23 +79,35 @@ function showAndHide(hole, delay) {
   return timeoutID;
 }
 
+/**
+ * Toggles the 'show' class for a hole.
+ */
 function toggleVisibility(hole) {
   hole.classList.toggle('show');
   return hole;
 }
 
+/**
+ * Increments the score and updates the scoreboard.
+ */
 function updateScore() {
   points += 1;
   score.textContent = points;
   return points;
 }
 
+/**
+ * Resets the score to 0 and updates the scoreboard.
+ */
 function clearScore() {
   points = 0;
   score.textContent = points;
   return points;
 }
 
+/**
+ * Updates the timer display and checks if the game is over.
+ */
 function updateTimer() {
   if (time > 0) {
     time -= 1;
@@ -90,16 +118,25 @@ function updateTimer() {
   return time;
 }
 
+/**
+ * Starts the timer and updates the timer display every second.
+ */
 function startTimer() {
   timer = setInterval(updateTimer, 1000);
   return timer;
 }
 
+/**
+ * Event handler for clicking a mole, updating the score.
+ */
 function whack(event) {
   updateScore();
   return points;
 }
 
+/**
+ * Adds 'click' event listeners to all moles.
+ */
 function setEventListeners() {
   moles.forEach(mole => {
     mole.addEventListener('click', whack);
@@ -107,16 +144,25 @@ function setEventListeners() {
   return moles;
 }
 
+/**
+ * Sets the game duration.
+ */
 function setDuration(duration) {
   time = duration;
   return time;
 }
 
+/**
+ * Stops the game and clears the timer.
+ */
 function stopGame() {
   clearInterval(timer);
   return "game stopped";
 }
 
+/**
+ * Starts the game, initializes score, timer, and event listeners.
+ */
 function startGame() {
   clearScore();
   setDuration(10); // Set the game duration to 10 seconds for example
@@ -128,7 +174,6 @@ function startGame() {
 
 startButton.addEventListener("click", startGame);
 
-// Please do not modify the code below.
 window.randomInteger = randomInteger;
 window.chooseHole = chooseHole;
 window.setDelay = setDelay;
