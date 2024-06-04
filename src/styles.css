@@ -25,8 +25,11 @@ h2 {
 }
 
 #start {
-    text-align: center;
-    font-size: 30px;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 30px;
 }
 
 #timer{
@@ -62,7 +65,7 @@ h2 {
 }
 
 .mole {
-  background:url('../assets/mole.png') bottom center no-repeat;
+  background:url('../assets/mole2.png') bottom center no-repeat;
   background-size: 40%;
   position: absolute;
   top: 100%;
